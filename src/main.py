@@ -1,8 +1,16 @@
+###
+# ESP32-based dot LED matrix clock with auto sync to NTP servers
+###
+
 # TODO ideas
 # - Disconnect from wifi after time sync
 # - Resync once per day, reporting offset
 # - Add webserver for wifi and timezone config
 # - Add button support for access point/reset/webserver mode, show date
+# - Add error handling ;)
+
+# Micropython/NTP concepts taken from
+# https://bhave.sh/micropython-ntp/
 
 import time
 import ntptime

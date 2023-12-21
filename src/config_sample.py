@@ -8,6 +8,6 @@ WIFI_SSID = "wifi-ssid"
 WIFI_PASSWORD = "wifi-password"
 
 ## Screen settings
-SCREEN_WIDTH = 32
+SCREEN_WIDTH = 64
 SCREEN_HEIGHT = 8
 SCREEN_BRIGHTNESS = 6  # 1-15

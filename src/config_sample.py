@@ -11,3 +11,6 @@ WIFI_PASSWORD = "wifi-password"
 SCREEN_WIDTH = 64
 SCREEN_HEIGHT = 8
 SCREEN_BRIGHTNESS = 6  # 1-15
+
+# Define local time zone as UTC-3
+UTC_OFFSET = -3 * 60 * 60

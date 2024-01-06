@@ -90,19 +90,36 @@ def main():
         if time.ticks_diff(time.ticks_ms(), time_iteration) >= 500:
             time_iteration = time.ticks_ms()
 
-            # Cycle between ":" and " " to show a 1-second blink
-            index_blinker = int(not index_blinker)
-
             # Get corrected time applying local UTC offset
             # Result format is (year, month, day, hour, minutes, seconds, weekday, yearday)
             # See https://docs.python.org/3/library/time.html#time.struct_time
             actual_time = time.localtime(time.time() + UTC_OFFSET)
+
+            # Cycle between ":" and " " to show a 1-second blink
+            index_blinker = int(not index_blinker)
 
             # Construct the 8-characters string to show on the dot matrix screen
             new_time = f"{actual_time[3]:02d}{blinker[index_blinker]}{actual_time[4]:02d}{blinker[index_blinker]}{actual_time[5]:02d}"
 
             # Show time on screen
             screen_write(screen, new_time)
+
+            # Check if it is time to lower screen brightness
+            if (
+                actual_time[3] == cfg.TIME_DND_START[0]
+                and actual_time[4] == cfg.TIME_DND_START[1]
+                and actual_time[5] == cfg.TIME_DND_START[2]
+            ):
+                screen.brightness(cfg.SCREEN_BRIGHTNESS_DND)
+
+            # Check if it is time to restore default screen brightness
+            if (
+                actual_time[3] == cfg.TIME_DND_STOP[0]
+                and actual_time[4] == cfg.TIME_DND_STOP[1]
+                and actual_time[5] == cfg.TIME_DND_STOP[2]
+            ):
+                screen.brightness(cfg.SCREEN_BRIGHTNESS)
+
         else:
             machine.idle()
 
